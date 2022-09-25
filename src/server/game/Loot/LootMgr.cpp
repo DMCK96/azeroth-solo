@@ -317,6 +317,17 @@ bool LootStoreItem::Roll(bool rate, Player const* player, Loot& loot, LootStore 
 
     float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) : 1.0f;
 
+    QueryResult result = CharacterDatabase.Query("SELECT `dropRate` FROM `individualdrop` WHERE `CharacterGUID` = '{}'", player->GetGUID().GetCounter());
+
+    if (result) {
+
+        Field* fields = result->Fetch();
+
+        float dropRate = fields[0].Get<uint32>();
+
+        qualityModifier = qualityModifier * dropRate;
+    }
+
     return roll_chance_f(_chance * qualityModifier);
 }
 
