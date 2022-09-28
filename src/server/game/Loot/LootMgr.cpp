@@ -27,7 +27,9 @@
 #include "SpellMgr.h"
 #include "Util.h"
 #include "World.h"
+#include "DataMap.h"
 
+class PlayerDropRate;
 static Rates const qualityToRate[MAX_ITEM_QUALITY] =
 {
     RATE_DROP_ITEM_POOR,                                    // ITEM_QUALITY_POOR
@@ -298,6 +300,14 @@ void LootStore::ReportNonExistingId(uint32 lootId, const char* ownerType, uint32
 // --------- LootStoreItem ---------
 //
 
+class PlayerDropRate : public DataMap::Base
+{
+public:
+    PlayerDropRate() {}
+    PlayerDropRate(uint32 DropRate) : DropRate(DropRate) {}
+    uint32 DropRate = 1;
+};
+
 // Checks if the entry (quest, non-quest, reference) takes it's chance (at loot generation)
 // RATE_DROP_ITEMS is no longer used for all types of entries
 bool LootStoreItem::Roll(bool rate, Player const* player, Loot& loot, LootStore const& store) const
@@ -316,6 +326,13 @@ bool LootStoreItem::Roll(bool rate, Player const* player, Loot& loot, LootStore 
     ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(itemid);
 
     float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) : 1.0f;
+
+    PlayerDropRate* playerDropRate;
+    playerDropRate = player->CustomData.Get<PlayerDropRate>("Individual_Drop");
+
+    uint32 dropRate = playerDropRate->DropRate;
+
+    qualityModifier = qualityModifier * dropRate;
 
     return roll_chance_f(_chance * qualityModifier);
 }
