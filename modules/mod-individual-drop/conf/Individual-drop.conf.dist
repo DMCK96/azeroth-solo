@@ -1,0 +1,26 @@
+[worldserver]
+
+#
+#    IndividualDrop.Enabled 
+#        Description: Enable or Disable the IndividualDrop Module.
+#        Default:     IndividualDrop.Enabled   = 1
+#
+IndividualDrop.Enabled = 1
+
+#
+#    IndividualDrop.Announce 
+#        Description: Announce the IndividualDrop Module at logon.
+#        Default:     IndividualDrop.Announce   = 1
+#
+IndividualDrop.Announce = 1
+
+#
+#    MaxDropRate 
+#        Description: This is the max amount a player can set their xp to.
+#        Default:     Default  = 1
+#    DefaultDropRate
+#        Description: This is the default rate players start with.
+#        Default:     Default  = 1
+#
+MaxDropRate = 10
+DefaultDropRate = 1
