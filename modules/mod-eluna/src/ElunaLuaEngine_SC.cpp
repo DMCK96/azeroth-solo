@@ -722,6 +722,11 @@ public:
         sEluna->OnBindToInstance(player, difficulty, mapid, permanent);
     }
 
+    void OnUpdateArea(Player* player, uint32 oldArea, uint32 newArea) override
+    {
+        sEluna->OnUpdateArea(player, oldArea, newArea);
+    }
+
     void OnUpdateZone(Player* player, uint32 newZone, uint32 newArea) override
     {
         sEluna->OnUpdateZone(player, newZone, newArea);
@@ -740,6 +745,11 @@ public:
     void OnAchiComplete(Player* player, AchievementEntry const* achievement) override
     {
         sEluna->OnAchiComplete(player, achievement);
+    }
+
+    void OnFfaPvpStateUpdate(Player* player, bool IsFlaggedForFfaPvp) override
+    {
+        sEluna->OnFfaPvpStateUpdate(player, IsFlaggedForFfaPvp);
     }
 };
 

@@ -381,6 +381,15 @@ void Eluna::OnBindToInstance(Player* pPlayer, Difficulty difficulty, uint32 mapi
     CallAllFunctions(PlayerEventBindings, key);
 }
 
+void Eluna::OnUpdateArea(Player* pPlayer, uint32 oldArea, uint32 newArea)
+{
+    START_HOOK(PLAYER_EVENT_ON_UPDATE_AREA);
+    Push(pPlayer);
+    Push(oldArea);
+    Push(newArea);
+    CallAllFunctions(PlayerEventBindings, key);
+}
+
 void Eluna::OnUpdateZone(Player* pPlayer, uint32 newZone, uint32 newArea)
 {
     START_HOOK(PLAYER_EVENT_ON_UPDATE_ZONE);
@@ -572,5 +581,14 @@ void Eluna::OnAchiComplete(Player* player, AchievementEntry const* achievement)
     START_HOOK(PLAYER_EVENT_ON_ACHIEVEMENT_COMPLETE);
     Push(player);
     Push(achievement);
+    CallAllFunctions(PlayerEventBindings, key);
+}
+
+
+void Eluna::OnFfaPvpStateUpdate(Player* player, bool hasFfaPvp)
+{
+    START_HOOK(PLAYER_EVENT_ON_FFAPVP_CHANGE);
+    Push(player);
+    Push(hasFfaPvp);
     CallAllFunctions(PlayerEventBindings, key);
 }
