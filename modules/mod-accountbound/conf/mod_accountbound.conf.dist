@@ -1,0 +1,29 @@
+[worldserver]
+
+###
+# Allow gamemasters to save and load companions and mounts
+AccountBound.Gamemasters = 0
+###
+
+###
+# Make companions shared across all characters of an account
+AccountBound.Companions = 1
+###
+
+###
+# Make heirlooms shared across all characters of an account
+# This requires the included creature to be spawned
+AccountBound.Heirlooms = 0
+###
+
+###
+# Make mounts shared shared across all characters of an account
+AccountBound.Mounts = 1
+###
+
+###
+# Allow accounts to be linked together and share the same mounts, companions and heirlooms
+# Note: Accounts have to be added to the account_bound_linked_accounts table for this to take effect
+# Warning: This is very experimental and may add items to an account that shouldn't have it. That is why it's not enabled by default, it does need a lot of testing!
+AccountBound.LinkedAccounts = 0
+###
